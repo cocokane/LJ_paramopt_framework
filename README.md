@@ -55,6 +55,9 @@ The following Python libraries are required and are listed in `requirements.txt`
 - `argparse`
 
 You can install these dependencies using the command:
+```bash
+pip install -r requirements.txt
+```
 ## Repository Structure
 
 ```plaintext
