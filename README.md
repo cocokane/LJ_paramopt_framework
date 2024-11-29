@@ -72,11 +72,6 @@ pip install -r requirements.txt
 └── LICENSE                     # Project license
 ```
 
-## Prerequisites
-- **Python**: Version 3.7 or higher
-- **GROMACS**: Version 2022.4 (must be installed separately)
-- **Python Packages**: Listed in `requirements.txt`
-
 ## Installation
 
 ### Clone the Repository
