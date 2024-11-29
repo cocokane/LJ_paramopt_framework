@@ -1,7 +1,7 @@
 # Active-Learning Assisted Framework for Efficient Parameterization of Non-Polarizable Force Fields
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Python](https://img.shields.io/badge/Python-3.8%2B-green.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.7%2B-green.svg)](https://www.python.org/)
 [![GROMACS](https://img.shields.io/badge/GROMACS-2022.4-blue.svg)](http://www.gromacs.org/)
 
 This repository contains code and documentation for the paper:
