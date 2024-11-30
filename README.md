@@ -62,14 +62,23 @@ pip install -r requirements.txt
 
 ```plaintext
 ├── README.md                   # Project documentation
-├── main.py                     # Main Python script
 ├── requirements.txt            # Python dependencies
+├── main.py                     # Main Python script
 ├── reference/
 │   ├── OO_target.out           # Reference OO RDF data from AIMD
 │   ├── SS_target.out           # Reference SS RDF data from AIMD
 │   └── MD_data.csv             # Initial parameter guesses and fitness data
 ├── output.txt                  # Generated LJ parameters from GA-GPR
 └── LICENSE                     # Project license
+```
+## Steps description
+
+```plaintext
+1. Use OPLS non bonded paremeters to generate new 200 parameters within ±5% of deviation
+2. Perform classical MD on 200 new parameters to extract density and required RDFs and create MD_data.csv
+3. Run main.py to generate output.txt and complete one iteration
+4. Best parameters from this iteration are stored in output.txt, perform classical MD for these parameters
+5. Based on selection criteria either finish or repeate step 3 by updating MD_data.csv unitll desired accuray is achieved
 ```
 
 ## Installation
