@@ -12,24 +12,24 @@ warnings.filterwarnings("ignore", category=UserWarning)
 
 ######################### 
 # Set this as required
-numberofind = 10 # Number of individuals that shall be finally printed
+numberofind = 10 # Number of parameters that shall be finally printed 
 #########################
 # Linux 
-target_file = 'reference/EMS_final_0.csv'
-oo_target = pd.read_csv('reference/OO_target.out', sep=" ", header=None, names=["dist", "g(r)"])
+target_file = 'reference/EMS_final_0.csv'  #Training data file
+oo_target = pd.read_csv('reference/OO_target.out', sep=" ", header=None, names=["dist", "g(r)"])   #AIMD O-O RDF file
 actual_rdf_oo = oo_target['g(r)'].to_numpy()
 # print(actual_rdf_oo)
-ss_target = pd.read_csv('reference/SS_target.out', sep=" ", header=None, names=["dist", "g(r)"])
+ss_target = pd.read_csv('reference/SS_target.out', sep=" ", header=None, names=["dist", "g(r)"])  #AIMD S-S RDF file
 actual_rdf_ss = ss_target['g(r)'].to_numpy()
 # print(actual_rdf_ss)
-actual_density = 1168.81  # Target density for comparison
+actual_density = 1168.81  # Experimental/AIMD Target density for comparison
 
 def calculate_fitness(black_box_output):
     """
     Calculates the Rx value and density from the black box output and computes the fitness value.
     
     Parameters:
-    - black_box_output: A numpy array with 798 elements for OO and SS histogram bins (501 each)
+    - black_box_output: A numpy array with 835 elements for OO and SS histogram bins (417 each)
       followed by the density value.
     
     Returns:
@@ -37,12 +37,12 @@ def calculate_fitness(black_box_output):
     """
     # Validate input length
     if len(black_box_output) != 835:  # 417 OO + 417 SS bins + 1 density
-        raise ValueError("The black box output must have 799 elements.")
+        raise ValueError("The black box output must have 835 elements.")
     
     # Extract OO and SS bins
     pred_density = black_box_output[0]
     ss_bins = black_box_output[1:418]
-    oo_bins = black_box_output[418:836]  # Adjust indices for 399 bins
+    oo_bins = black_box_output[418:836]  # Adjust indices for 417 bins
 
     
     # Calculate OO and SS sum of squares
@@ -75,17 +75,17 @@ data = pd.read_csv(file_path)
 
 # Correct way to drop columns
 data = data.drop(['Error %', 'Mutation EMS'], axis=1) 
-data_subset = data.iloc[:, 16:]
+data_subset = data.iloc[:, 16:]    #columns defined according to atom types 
 data_subset
 fitness_values = []
 for index, row in data.iterrows():
-    # Combine SO, SS, and density values into a single array to pass to the function
+    # Combine OO, SS, and density values into a single array to pass to the function
     output = np.concatenate([row[16:].values])
     fitness = calculate_fitness(output)
     fitness_values.append(fitness)
 
 # Create the new DataFrame with sigma, epsilon parameters, and the calculated fitness values
-data_fitness = pd.DataFrame(data.iloc[:, :16])  # First 16 columns are sigma and epsilon parameters
+data_fitness = pd.DataFrame(data.iloc[:, :16])  # First 16 columns are sigma and epsilon parameters (sigma(1), eps(1), sigma(2), eps(2)..)
 data_fitness['Fitness'] = fitness_values  # Append the fitness values as a new column
 X = data_fitness.iloc[:, :16].values
 # Assuming the fitness function value is stored in the last column
@@ -169,7 +169,7 @@ top_n_individuals = np.array([ind for ind, fit in individuals_with_fitness[:numb
 def process_and_save(new_x):
     # Assuming new_x is a numpy array of shape [8, 16]
     
-    atom_types = ["S", "O", "CS", "HS", "CB", "HB", "CC", "HC"]
+    atom_types = ["S", "O", "CS", "HS", "CB", "HB", "CC", "HC"]  #Adjust accordingly
     
     # Specify the file name
     output_file = 'output.txt'
@@ -212,4 +212,4 @@ def process_and_save(new_x):
 process_and_save(top_n_individuals)
 print("output.txt generated")
 
-print("Run complete. Please copy paste output.txt to the required location.")
+print("Run complete. Please use output.txt to run MD simulations.")
