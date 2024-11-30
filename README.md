@@ -67,8 +67,8 @@ pip install -r requirements.txt
 ├── reference/
 │   ├── OO_target.out           # Reference OO RDF data from AIMD
 │   ├── SS_target.out           # Reference SS RDF data from AIMD
-│   └── MD_data.csv             # Initial parameter guesses and fitness data
-├── output.txt                  # Generated LJ parameters from GA-GPR
+│   └── MD_data.csv             # Training data file
+├── output.txt                  # best parameters from each iteration
 └── LICENSE                     # Project license
 ```
 ## Steps description
