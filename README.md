@@ -1,8 +1,8 @@
-# Active-Learning Assisted Framework for Efficient Parameterization of Non-Polarizable Force Fields
+# Active-Learning Assisted Framework for Efficient Parameterization of Force Fields
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/Python-3.7%2B-green.svg)](https://www.python.org/)
-[![GROMACS](https://img.shields.io/badge/GROMACS-2022.4-blue.svg)](http://www.gromacs.org/)
+[![GROMACS](https://img.shields.io/badge/GROMACS-blue.svg)](http://www.gromacs.org/)
 
 This repository contains code and documentation for the paper:
 
@@ -44,8 +44,7 @@ To run this repository, the following prerequisites are required:
 ### System Requirements
 - **Operating System**: Linux or macOS (Windows with WSL is supported but not tested extensively).
 - **Python Version**: Python 3.7 or higher.
-- **GROMACS**: Version 2022.4 (must be installed separately).
-
+- **GROMACS**: GROMACS 2022.4 was used during development. Compatibility with other versions has not been evaluated. Please ensure GROMACS is installed separately.
 ### Python Dependencies
 The following Python libraries are required and are listed in `requirements.txt`:
 - `numpy`
@@ -57,19 +56,6 @@ The following Python libraries are required and are listed in `requirements.txt`
 You can install these dependencies using the command:
 ```bash
 pip install -r requirements.txt
-```
-## Repository Structure
-
-```plaintext
-├── README.md                   # Project documentation
-├── main.py                     # Main Python script
-├── requirements.txt            # Python dependencies
-├── reference/
-│   ├── OO_target.out           # Reference OO RDF data from AIMD
-│   ├── SS_target.out           # Reference SS RDF data from AIMD
-│   └── MD_data.csv             # Initial parameter guesses and fitness data
-├── output.txt                  # Generated LJ parameters from GA-GPR
-└── LICENSE                     # Project license
 ```
 
 ## Installation
@@ -84,21 +70,52 @@ cd active-learning-force-fields
 It is recommended to use a virtual environment:
 
 ```bash
-Copy code
 python3 -m venv venv
 source venv/bin/activate
 ```
 ### Install required Python packages:
 ```bash
-Copy code
 pip install -r requirements.txt
 ```
 ### GROMACS Installation
 Ensure that GROMACS 2022.4 is installed and properly configured in your environment. Detailed installation instructions can be found on the GROMACS website.
 ## Usage
 
+### Input Data
+
+The reference RDF data for OO and SS pairs from AIMD simulations must be stored in the `reference/` directory. The initial parameter guesses and fitness data are stored in `reference/MD_data.csv`.
+(Yati di, pls provide info on the format of the data)
+### File Structure for running the framework
+
+```plaintext
+├── README.md                   # Project documentation
+├── main.py                     # Main Python script
+├── requirements.txt            # Python dependencies
+├── reference/
+│   ├── OO_target.out           # Reference OO RDF data from AIMD
+│   ├── SS_target.out           # Reference SS RDF data from AIMD
+│   └── MD_data.csv             # Initial parameter guesses and fitness data
+├── output.txt                  # Generated LJ parameters from GA-GPR
+└── LICENSE                     # Project license
+```
+
+As the framework was developed primarily for sulfone molecules, the main script `main.py` is configured to optimize LJ parameters for OO and SS pairs. The script can be modified to optimize parameters for other atom pairs by changing the variables in the `main.py` script.
+
+Ensure that the data files are correctly placed in the `reference/` directory before running the main script.
+
 To run the main script, use the following command:
 
 ```bash
 python main.py
 ```
+
+The script will execute the GA-GPR optimization process and output the optimized LJ parameters to `output.txt`.
+
+This must be followed by executing the MD simulations in GROMACS, using the parameters stored in output.txt. 
+
+Sequentially, the following steps are to be followed:
+1. Run the `main.py` script to generate the optimized LJ parameters.
+2. Execute the GROMACS simulations using the optimized parameters.
+3. Evaluate the fitness of the optimized parameters using the generated data.
+4. Run the `main.py` again, which will use the fitness data to train the GPR model and predict new parameter sets.
+5. Repeat steps 2-4 until the optimized parameters converge.
