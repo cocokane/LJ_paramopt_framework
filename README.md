@@ -6,7 +6,7 @@
 
 This repository contains code and documentation for the paper:
 
-**Active-Learning Assisted General Framework for Efficient Parameterization of Non-Polarizable Force Fields** submitted to the *Journal of Chemical Theory and Computation*.
+**Active-Learning Assisted General Framework for Efficient Parameterization of Force Fields** submitted to the *Journal of Chemical Theory and Computation*.
 
 **Authors**: Yati<sup>1</sup>, Yash Kokane<sup>2</sup>, and Anirban Mondal<sup>1,*</sup>  
 <sup>1</sup>Department of Chemistry, Indian Institute of Technology Gandhinagar, Gujarat, 382355, India  
