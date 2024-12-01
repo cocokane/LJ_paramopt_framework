@@ -62,8 +62,8 @@ pip install -r requirements.txt
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/your_username/active-learning-force-fields.git
-cd active-learning-force-fields
+git clone https://github.com/cocokane/LJ_paramopt_framework.git
+cd LJ_paramopt_framework
 ```
 
 ### Install Python Dependencies
@@ -84,8 +84,8 @@ Ensure that GROMACS 2022.4 is installed and properly configured in your environm
 ### Input Data
 
 The reference RDF data for OO and SS pairs from AIMD simulations must be stored in the `reference/` directory. The initial parameter guesses and fitness data are stored in `reference/MD_data.csv`.
-(Yati di, pls provide info on the format of the data)
-### File Structure for running the framework
+
+### Required File Structure 
 
 ```plaintext
 ├── README.md                   # Project documentation
@@ -109,13 +109,16 @@ To run the main script, use the following command:
 python main.py
 ```
 
-The script will execute the GA-GPR optimization process and output the optimized LJ parameters to `output.txt`.
+The script will execute the GA-GPR optimization process and output the predicted optimal LJ parameters to `output.txt`.
 
 This must be followed by executing the MD simulations in GROMACS, using the parameters stored in output.txt. 
 
-Sequentially, the following steps are to be followed:
-1. Run the `main.py` script to generate the optimized LJ parameters.
-2. Execute the GROMACS simulations using the optimized parameters.
-3. Evaluate the fitness of the optimized parameters using the generated data.
-4. Run the `main.py` again, which will use the fitness data to train the GPR model and predict new parameter sets.
-5. Repeat steps 2-4 until the optimized parameters converge.
+## Steps to run the framework
+
+```plaintext
+1. Use OPLS non bonded paremeters to generate new 200 parameters within ±5% of deviation
+2. Perform classical MD on 200 new parameters to extract density and required RDFs and create MD_data.csv
+3. Run main.py to generate output.txt, which contains optimized parameters using GA-GPR. This script uses MD_data.csv to train GPR model and predict new parameters, and completes one iteration of the optimization process.
+4. Best parameters from this iteration are stored in output.txt, perform classical MD for these parameters
+5. Based on selection criteria either finish or repeat step 3 and 4 by updating MD_data.csv unitll desired accuracy is achieved.
+```
