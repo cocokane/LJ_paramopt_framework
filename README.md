@@ -111,15 +111,13 @@ python main.py
 
 The script will execute the GA-GPR optimization process and output the predicted optimal LJ parameters to `output.txt`.
 
-This must be followed by executing the MD simulations in GROMACS, using the parameters stored in output.txt. 
-Sample files for training data set - MD_data.csv, AIMD reference RDFs and output.txt is avaialable for easy access of data structure.
+The next step involves performing MD simulations in GROMACS using the parameters stored in output.txt. Sample files, including the training dataset (MD_data.csv), AIMD reference RDFs (OO_target.out and SS_target.out), and the output file (output.txt), are provided as an example to familiarize users with the expected data structure.
 
 ## Steps to run the framework
 
-```plaintext
+
 1. Use OPLS non bonded paremeters to generate new 200 parameters within ±5% of deviation
 2. Perform classical MD on 200 new parameters to extract density and required RDFs and create MD_data.csv
-3. Run main.py to generate output.txt, which contains optimized parameters using GA-GPR. This script uses MD_data.csv to train GPR model and predict new parameters, and completes one iteration of the optimization process.
-4. Best parameters from this iteration are stored in output.txt, perform classical MD for these parameters
-5. Based on selection criteria either finish or repeat step 3 and 4 by updating MD_data.csv unitll desired accuracy is achieved.
-```
+3. Run main.py to generate output.txt, which contains optimized LJ parameters. This script uses MD_data.csv to train the GPR model and predict new parameters, and completes one iteration of the optimization process.
+4. Best parameters from this iteration are stored in output.txt, perform classical MD using GROMACS for these parameters.
+5. Based on your accuracy requirements, either finish or repeat step 3 and 4 by updating MD_data.csv until desired accuracy is achieved.

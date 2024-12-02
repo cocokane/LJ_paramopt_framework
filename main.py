@@ -9,20 +9,29 @@ from deap import creator, base, tools, algorithms
 import warnings
 # Ignore UserWarning raised by sklearn when predicting without feature names
 warnings.filterwarnings("ignore", category=UserWarning)
+##########################
+# Configuration Parameters
+##########################
 
-######################### 
-# Set this as required
-numberofind = 10 # Number of parameters that shall be finally printed 
-#########################
-# Linux 
-target_file = 'reference/EMS_final_0.csv'  #Training data file
-oo_target = pd.read_csv('reference/OO_target.out', sep=" ", header=None, names=["dist", "g(r)"])   #AIMD O-O RDF file
+# Number of parameters to be printed in the final output
+numberofind = 10  
+
+# Filepath for training data (density and RDFs from MD simulations)
+target_file = 'reference/MD_data.csv'  
+
+# Loading reference data for AIMD-derived RDFs and density
+# OO_target.out: Reference O-O RDF file from AIMD
+oo_target = pd.read_csv('reference/OO_target.out', sep=" ", header=None, names=["dist", "g(r)"])  
+
+# SS_target.out: Reference S-S RDF file from AIMD
+ss_target = pd.read_csv('reference/SS_target.out', sep=" ", header=None, names=["dist", "g(r)"])  
+
+# Reference density value from AIMD simulations (in kg/m^3)
+actual_density = 1168.81  
+
+##########################
 actual_rdf_oo = oo_target['g(r)'].to_numpy()
-# print(actual_rdf_oo)
-ss_target = pd.read_csv('reference/SS_target.out', sep=" ", header=None, names=["dist", "g(r)"])  #AIMD S-S RDF file
 actual_rdf_ss = ss_target['g(r)'].to_numpy()
-# print(actual_rdf_ss)
-actual_density = 1168.81  # Experimental/AIMD Target density for comparison
 
 def calculate_fitness(black_box_output):
     """
