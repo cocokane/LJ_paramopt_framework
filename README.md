@@ -29,6 +29,8 @@ This repository contains code and documentation for the paper:
 
 This repository provides the implementation of an efficient approach to optimizing Lennard-Jones (LJ) force field parameters for sulfone molecules. The framework combines Genetic Algorithms (GA) with Gaussian Process Regression (GPR) to significantly reduce the computational expense associated with traditional force field parameterization methods.
 
+![Workflow](Workflow.png)
+
 The code is designed to:
 
 - Start with initial LJ parameter guesses near the OPLS (Optimized Potentials for Liquid Simulations) values.
