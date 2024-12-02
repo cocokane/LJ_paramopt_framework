@@ -15,7 +15,7 @@ warnings.filterwarnings("ignore", category=UserWarning)
 numberofind = 10 # Number of parameters that shall be finally printed 
 #########################
 # Linux 
-target_file = 'reference/EMS_final_0.csv'  #Training data file
+target_file = 'reference/MD_data.csv'  #Training data file
 oo_target = pd.read_csv('reference/OO_target.out', sep=" ", header=None, names=["dist", "g(r)"])   #AIMD O-O RDF file
 actual_rdf_oo = oo_target['g(r)'].to_numpy()
 # print(actual_rdf_oo)
