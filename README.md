@@ -119,7 +119,8 @@ Sample files for training data set - MD_data.csv, AIMD reference RDFs and output
 ```plaintext
 1. Use OPLS non bonded paremeters to generate new 200 parameters within ±5% of deviation
 2. Perform classical MD on 200 new parameters to extract density and required RDFs and create MD_data.csv
-3. Run main.py to generate output.txt, which contains optimized parameters using GA-GPR. This script uses MD_data.csv to train GPR model and predict new parameters, and completes one iteration of the optimization process.
+3. Run main.py to generate output.txt, which contains optimized parameters using GA-GP,
+   This script uses MD_data.csv to train GPR model and predict new parameters, and completes one iteration of the optimization process
 4. Best parameters from this iteration are stored in output.txt, perform classical MD for these parameters
-5. Based on selection criteria either finish or repeat step 3 and 4 by updating MD_data.csv unitll desired accuracy is achieved.
+5. Based on selection criteria either finish or repeat step 3 and 4 by updating MD_data.csv unitll desired accuracy is achieved
 ```
