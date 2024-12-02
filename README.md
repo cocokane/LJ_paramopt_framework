@@ -115,7 +115,6 @@ The next step involves performing MD simulations in GROMACS using the parameters
 
 ## Steps to run the framework
 
-
 1. Use OPLS non bonded paremeters to generate new 200 parameters within ±5% of deviation
 2. Perform classical MD on 200 new parameters to extract density and required RDFs and create MD_data.csv
 3. Run main.py to generate output.txt, which contains optimized LJ parameters. This script uses MD_data.csv to train the GPR model and predict new parameters, and completes one iteration of the optimization process.

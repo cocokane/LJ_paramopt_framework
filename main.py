@@ -13,6 +13,7 @@ warnings.filterwarnings("ignore", category=UserWarning)
 # Configuration Parameters
 ##########################
 
+<<<<<<< HEAD
 # Number of parameters to be printed in the final output
 numberofind = 10  
 
@@ -30,6 +31,15 @@ ss_target = pd.read_csv('reference/SS_target.out', sep=" ", header=None, names=[
 actual_density = 1168.81  
 
 ##########################
+=======
+######################### 
+# Set this as required
+numberofind = 10 # Number of parameters that shall be finally printed 
+#########################
+# Linux 
+target_file = 'reference/MD_data.csv'  #Training data file
+oo_target = pd.read_csv('reference/OO_target.out', sep=" ", header=None, names=["dist", "g(r)"])   #AIMD O-O RDF file
+>>>>>>> 4f762a90456649bb21a38066e35cf5184318a3a9
 actual_rdf_oo = oo_target['g(r)'].to_numpy()
 actual_rdf_ss = ss_target['g(r)'].to_numpy()
 
