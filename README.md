@@ -112,6 +112,7 @@ python main.py
 The script will execute the GA-GPR optimization process and output the predicted optimal LJ parameters to `output.txt`.
 
 This must be followed by executing the MD simulations in GROMACS, using the parameters stored in output.txt. 
+Sample files for training data set - MD_data.csv, AIMD reference RDFs and output.txt is avaialable for easy access of data structure.
 
 ## Steps to run the framework
 
